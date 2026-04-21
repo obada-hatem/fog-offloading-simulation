@@ -26,7 +26,6 @@ public class MinMinSimulation {
         
         while (assignedCount < n) {
             
-            // Step 1: For each unassigned task, find best resource
             double[] taskMinCompletion = new double[n];
             int[] taskBestResource = new int[n];
             
@@ -51,7 +50,6 @@ public class MinMinSimulation {
                 }
             }
             
-            // Step 2: Find task with SMALLEST minimum completion time
             int bestTask = -1;
             double globalMin = Double.MAX_VALUE;
             
@@ -95,7 +93,6 @@ public class MinMinSimulation {
             totalNetwork += network;
         }
         
-        // Print distribution
         System.out.println("[Min-Min] Task Distribution:");
         for (int j = 0; j < numResources; j++) {
             String type = SystemModel.isLocal(j) ? "LOCAL" : 
