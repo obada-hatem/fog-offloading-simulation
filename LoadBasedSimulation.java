@@ -24,7 +24,6 @@ public class LoadBasedSimulation {
         
         for (Task task : tasks) {
             
-            // Find resources with smallest queue
             double minQueue = Double.MAX_VALUE;
             java.util.ArrayList<Integer> bestResources = new java.util.ArrayList<>();
             
