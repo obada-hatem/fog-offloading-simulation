@@ -17,7 +17,6 @@ public class MainExperiment {
         // Initialize CSV file for results
         ResultsExporter.initFile();
 
-        // Define IoT device counts to test
         int[] iotSizes = {100, 250, 500, 750, 1000, 1250, 1500};
         int runs = 10;  // Number of runs per configuration
 
@@ -40,12 +39,9 @@ public class MainExperiment {
 
                 System.out.println("\nRun " + (i + 1));
 
-                // Generate SAME tasks for fairness across all algorithms
                 Task[] tasks = TaskGenerator.generateTasks(users);
 
-                // =====================
-                // Q-LEARNING
-                // =====================
+                
                 long startTime = System.nanoTime();
                 SimulationResult qRes = QLearningSimulation.run(tasks, users);
                 long endTime = System.nanoTime();
@@ -57,9 +53,7 @@ public class MainExperiment {
                 totalQEng += qRes.energy;
                 totalQNet += qRes.network;
 
-                // =====================
-                // MIN-MIN
-                // =====================
+                
                 startTime = System.nanoTime();
                 SimulationResult mRes = MinMinSimulation.run(tasks, users);
                 endTime = System.nanoTime();
@@ -71,9 +65,7 @@ public class MainExperiment {
                 totalMEng += mRes.energy;
                 totalMNet += mRes.network;
 
-                // =====================
-                // LOAD-BASED
-                // =====================
+             
                 startTime = System.nanoTime();
                 SimulationResult lRes = LoadBasedSimulation.run(tasks, users);
                 endTime = System.nanoTime();
@@ -86,9 +78,7 @@ public class MainExperiment {
                 totalLNet += lRes.network;
             }
 
-            // =====================
-            // CALCULATE AVERAGES
-            // =====================
+          
             double avgQLat = totalQLat / runs;
             double avgQEng = totalQEng / runs;
             double avgQNet = totalQNet / runs;
@@ -101,9 +91,7 @@ public class MainExperiment {
             double avgLEng = totalLEng / runs;
             double avgLNet = totalLNet / runs;
 
-            // =====================
-            // PRINT AVERAGE RESULTS
-            // =====================
+           
             System.out.println("\n--- AVERAGE RESULTS (" + users + " Devices) ---");
             
             System.out.println(String.format("%-12s | %-12s | %-12s | %-12s", 
@@ -119,9 +107,7 @@ public class MainExperiment {
             System.out.println(String.format("%-12s | %-12.4f | %-12.4f | %-12.4f", 
                 "Load-Based", avgLLat, avgLEng, avgLNet));
 
-            // =====================
-            // SAVE TO CSV FILE
-            // =====================
+            
             ResultsExporter.writeResult("Q-Learning", users, avgQLat, avgQEng, avgQNet);
             ResultsExporter.writeResult("Min-Min", users, avgMLat, avgMEng, avgMNet);
             ResultsExporter.writeResult("Load-Based", users, avgLLat, avgLEng, avgLNet);
@@ -131,9 +117,7 @@ public class MainExperiment {
         System.out.println(" ALL EXPERIMENTS COMPLETED ");
         System.out.println("==========================================");
         
-        // =====================
-        // AUTO-GENERATE CHARTS FROM RESULTS
-        // =====================
+       
         System.out.println("\n Generating charts from CSV data...");
         
         try {
