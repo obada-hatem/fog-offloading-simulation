@@ -8,7 +8,6 @@ import org.fog.test.perfeval.simulation.SimulationResult;
 
 public class QLearningSimulation {
     
-    // ========== INCREASED TRAINING ==========
     private static final int TRAIN_EPISODES = 30000;  // Increased to 30,000
     private static final double DEADLINE_MS = 200.0;
     
@@ -78,7 +77,6 @@ public class QLearningSimulation {
                 transmissionTimeMs
             );
             
-            // FIXED: computeNetwork now takes 2 parameters (resource, taskSize)
             double network = MetricsCollector.computeNetwork(action, task.size, numDevices);
             
             readyTime[action] += computationTimeMs;
@@ -123,7 +121,6 @@ public class QLearningSimulation {
                 transmissionTimeMs
             );
             
-            // FIXED: computeNetwork now takes 2 parameters
             double network = MetricsCollector.computeNetwork(action, task.size, numDevices);
             
             boolean metDeadline = latency <= DEADLINE_MS;
