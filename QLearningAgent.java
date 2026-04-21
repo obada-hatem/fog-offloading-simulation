@@ -16,12 +16,10 @@ public class QLearningAgent {
     
     private int actionSize;
     
-    // Simplified normalization
     private static final double MAX_LATENCY = 10000.0;
     private static final double MAX_ENERGY = 5000.0;
     private static final double MAX_NETWORK = 200.0;
     
-    // Reward weights - focus on latency and energy
     private static final double WEIGHT_LATENCY = 0.5;
     private static final double WEIGHT_ENERGY = 0.4;
     private static final double WEIGHT_NETWORK = 0.1;
@@ -35,7 +33,6 @@ public class QLearningAgent {
         this.actionSize = actionSize;
     }
     
-    // SIMPLIFIED state representation
     public String discretizeState(double[] queueTimes, double taskSize) {
         // Only track the minimum queue and which resource type has it
         int bestResource = 0;
@@ -51,7 +48,6 @@ public class QLearningAgent {
         int sizeLevel = getSizeLevel(taskSize);
         int resourceType = getResourceType(bestResource);
         
-        // Much smaller state space
         return queueLevel + "," + sizeLevel + "," + resourceType;
     }
     
@@ -107,7 +103,6 @@ public class QLearningAgent {
         
         double reward = -cost;
         
-        // Strong deadline incentive
         if (metDeadline) {
             reward += 1.0;
         } else {
