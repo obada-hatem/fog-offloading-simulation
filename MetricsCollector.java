@@ -4,9 +4,7 @@ import org.fog.test.perfeval.model.SystemModel;
 
 public class MetricsCollector {
 
-    // ================================
-    // ENERGY PARAMETERS (NORMALIZED)
-    // ================================
+   
 
     private static final double LOCAL_ENERGY_PER_MI = 0.5;
     private static final double FOG_ENERGY_PER_MI   = 0.8;
@@ -15,9 +13,7 @@ public class MetricsCollector {
     private static final double TX_ENERGY_PER_MB = 0.4;
     private static final double MI_TO_MB = 0.01;
 
-    // ================================
-    // LATENCY COMPONENTS
-    // ================================
+  
 
     public static double computeTransmissionTime(int resource, double taskSizeMI) {
 
@@ -35,9 +31,6 @@ public class MetricsCollector {
         return (taskSizeMI / mips) * 1000.0; // ms
     }
 
-    // ================================
-    // CONTENTION MODEL (FIXED & REALISTIC)
-    // ================================
 
     public static double computeContention(int resource, int totalDevices) {
 
@@ -51,7 +44,6 @@ public class MetricsCollector {
             return factor * 2.0;
         }
 
-        // Cloud is NOT congestion-free in reality
         return factor * 1.2;
     }
     public static double computeQueueDrain(int numDevices, double queueLength) {
@@ -64,9 +56,7 @@ public class MetricsCollector {
         return loadPressure * (1.0 + Math.log1p(queueLength));
     }
 
-    // ================================
-    // TOTAL LATENCY
-    // ================================
+  
 
     public static double computeLatency(int resource,
                                         double taskSizeMI,
@@ -78,15 +68,12 @@ public class MetricsCollector {
         double propagation  = SystemModel.PROP_DELAY[resource];
         double contention   = computeContention(resource, totalDevices);
 
-        // realistic queue saturation (prevents explosion but still impactful)
         double queue = Math.min(queueTimeMs, 300.0);
 
         return transmission + computation + propagation + queue + contention;
     }
 
-    // ================================
-    // ENERGY MODEL (CONSISTENT)
-    // ================================
+   
 
     public static double computeEnergy(int resource,
                                        double taskSizeMI,
@@ -95,25 +82,20 @@ public class MetricsCollector {
 
         double dataSizeMB = taskSizeMI * MI_TO_MB;
 
-        // dynamic computation energy
         double computationEnergy = getEnergyPerMI(resource) * taskSizeMI;
 
-        // transmission energy (only if offloaded)
         double transmissionEnergy = 0.0;
         if (!SystemModel.isLocal(resource)) {
             transmissionEnergy = dataSizeMB * TX_ENERGY_PER_MB;
         }
 
-        // static energy (idle + execution time)
         double activeTimeSec = computationTimeMs / 1000.0;
         double staticEnergy = getStaticPower(resource) * (activeTimeSec + 0.05);
 
         return computationEnergy + transmissionEnergy + staticEnergy;
     }
 
-    // ================================
-    // NETWORK MODEL (FIXED - SCALE AWARE)
-    // ================================
+    
 
     public static double computeNetwork(int resource,
             double taskSizeMI,
@@ -136,9 +118,7 @@ base = dataSizeMB * 3.5;
 return base * congestionFactor;
 }
 
-    // ================================
-    // HELPERS
-    // ================================
+
 
     private static double getEnergyPerMI(int resource) {
         if (SystemModel.isLocal(resource)) return LOCAL_ENERGY_PER_MI;
