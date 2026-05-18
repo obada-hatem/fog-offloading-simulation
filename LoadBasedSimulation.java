@@ -38,7 +38,6 @@ public class LoadBasedSimulation {
                 }
             }
             
-            // Randomly select among best resources for load balancing
             int bestResource;
             if (bestResources.size() > 1) {
                 // Random choice to distribute load
