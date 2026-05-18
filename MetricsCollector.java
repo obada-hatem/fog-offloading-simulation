@@ -22,13 +22,13 @@ public class MetricsCollector {
         double dataSizeMB = taskSizeMI * MI_TO_MB;
         double bandwidth = SystemModel.BANDWIDTH[resource];
 
-        return (dataSizeMB / bandwidth) * 1000.0; // ms
+        return (dataSizeMB / bandwidth) * 1000.0; 
     }
 
     public static double computeComputationTime(int resource, double taskSizeMI) {
 
         double mips = SystemModel.MIPS[resource];
-        return (taskSizeMI / mips) * 1000.0; // ms
+        return (taskSizeMI / mips) * 1000.0; 
     }
 
 
