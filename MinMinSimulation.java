@@ -14,7 +14,7 @@ public class MinMinSimulation {
         
         boolean[] assigned = new boolean[n];
         double[] readyTime = new double[numResources];
-        int[] taskCount = new int[numResources];  // Track tasks per resource
+        int[] taskCount = new int[numResources];  
         
         double totalLatency = 0;
         double totalEnergy = 0;
