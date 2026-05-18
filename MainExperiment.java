@@ -14,7 +14,6 @@ public class MainExperiment {
 
     public static void main(String[] args) {
 
-        // Initialize CSV file for results
         ResultsExporter.initFile();
 
         int[] iotSizes = {100, 250, 500, 750, 1000, 1250, 1500};
