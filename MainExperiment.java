@@ -17,7 +17,7 @@ public class MainExperiment {
         ResultsExporter.initFile();
 
         int[] iotSizes = {100, 250, 500, 750, 1000, 1250, 1500};
-        int runs = 10;  // Number of runs per configuration
+        int runs = 10;  
 
         System.out.println("==========================================");
         System.out.println("Fog Computing Task Offloading Simulation");
@@ -44,7 +44,7 @@ public class MainExperiment {
                 long startTime = System.nanoTime();
                 SimulationResult qRes = QLearningSimulation.run(tasks, users);
                 long endTime = System.nanoTime();
-                double qTime = (endTime - startTime) / 1_000_000.0; // ms
+                double qTime = (endTime - startTime) / 1_000_000.0; 
                 
                 System.out.printf("Q-Learning: %.4f ms (exec time: %.2f ms)%n", qRes.latency, qTime);
 
