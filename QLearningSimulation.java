@@ -8,13 +8,13 @@ import org.fog.test.perfeval.simulation.SimulationResult;
 
 public class QLearningSimulation {
     
-    private static final int TRAIN_EPISODES = 30000;  // Increased to 30,000
+    private static final int TRAIN_EPISODES = 30000;  
     private static final double DEADLINE_MS = 200.0;
     
-    private static final double LEARNING_RATE = 0.15;   // Increased
-    private static final double DISCOUNT_FACTOR = 0.99;  // Increased
+    private static final double LEARNING_RATE = 0.15;   
+    private static final double DISCOUNT_FACTOR = 0.99;  
     private static final double INITIAL_EPSILON = 1.0;
-    private static final double EPSILON_DECAY = 0.9995;  // Slower decay
+    private static final double EPSILON_DECAY = 0.9995;  
     private static final double MIN_EPSILON = 0.01;
     
     public static SimulationResult run(Task[] allTasks, int numDevices) {
